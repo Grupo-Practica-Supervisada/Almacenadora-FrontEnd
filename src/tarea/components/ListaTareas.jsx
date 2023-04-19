@@ -1,14 +1,22 @@
 import { useEffect, useState } from "react";
 import { DeleteTarea, apiTareas } from "../api/apiTareas";
-import { apiUsuarios } from "../api/apiUsuarios"; // Importa la API de usuarios
-import { Link } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Swal from "sweetalert2";
+import { UpdateTarea } from "./UpdateTarea";
 
 export const ListaTareas = () => {
   const [listaTareas, setListaTareas] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [tareas, setTareas] = useState({
+    nombre: "",
+    descripcion: "", 
+    fechaInicio: new Date(), 
+    fechaFinal: new Date(), 
+    estado: false, 
+    creador: ""
+  });
   const [isChecked, setIsChecked] = useState(true);
 
   const viewTareasList = async () => {
@@ -16,9 +24,24 @@ export const ListaTareas = () => {
     setListaTareas(getListTareasFromApi);
   };
 
+  const reload = async () => {
+    const result = await apiTareas();
+    setTareas(result);
+  };
+
   useEffect(() => {
     viewTareasList();
-  }, []);
+  }, [showModal]);
+
+  const handleOpenModal = (u) => {
+    setShowModal(true);
+    setTareas(u);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
 
   const eliminar = async (id) => {
     let result = await DeleteTarea(id);
@@ -73,7 +96,7 @@ export const ListaTareas = () => {
                       Ver
                       <VisibilityIcon />
                     </button>
-                    <button className="btn btn-warning">
+                    <button className="btn btn-warning"  onClick={() => handleOpenModal(u)}>
                       Editar
                       <EditIcon />
                     </button>
@@ -91,6 +114,11 @@ export const ListaTareas = () => {
             })}
           </tbody>
         </table>
+        <UpdateTarea
+          tareaEdit={tareas}
+          isOpen={showModal}
+          onClose={() => handleCloseModal()}
+        ></UpdateTarea>
       </div>
     </>
   );

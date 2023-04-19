@@ -3,8 +3,8 @@ import { Login } from './login/components/Login'
 import { Link, Navigate, Route, Routes } from 'react-router-dom'
 import { NavBar } from './NavBar';
 import { isUserAuthenticated } from './login/helpers/LoginHelper';
-import { ListaTareas } from './user/components/ListaTareas';
-import { CreateUser } from './user/components/CreateUser';
+import { ListaTareas } from './tarea/components/ListaTareas';
+import { CreateUser } from './tarea/components/CreateUser';
 
 export const AppRouter = () => {
     return (
