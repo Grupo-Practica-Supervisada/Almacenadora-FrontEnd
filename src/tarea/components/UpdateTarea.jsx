@@ -8,7 +8,7 @@ export const UpdateTarea = ({ isOpen, onClose, tareaEdit }) => {
   console.log("Valor de fecha:", tareaEdit.fechaInicio);
   console.log("Valor de fecha:", tareaEdit.fechaFinal);
 
-
+  console.log("EL VALOR DEL USUARIO QUE QUIERE EDITAR ES: ", tareaEdit)
   return (
     <>
       <>
@@ -18,11 +18,8 @@ export const UpdateTarea = ({ isOpen, onClose, tareaEdit }) => {
           </Modal.Header>
           <Modal.Body>
             <FormTarea
-              nombre={tareaEdit.nombre}
-              descripcion={tareaEdit.descripcion}
-              fechaInicio={tareaEdit.fechaInicio}
-              fechaFinal={tareaEdit.fechaFinal}
-              creador={tareaEdit.creador}
+              tarea={tareaEdit}
+              id={tareaEdit._id}
               option={2}
             />
           </Modal.Body>

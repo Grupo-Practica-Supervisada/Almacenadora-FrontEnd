@@ -33,20 +33,15 @@ export const DeleteTarea = async (id) => {
 
   export const updateTarea = async (id, nombre, descripcion, fechaInicio, fechaFinal, estado, creador) => {
     try {
-      const { data } = await axios.put(
+      const { data: { tareaEditada } } = await axios.put(
         `${URL}editar/${id}`,
         {
           nombre, descripcion, fechaInicio, fechaFinal, estado, creador
         },
-        console.log(data)
         // { headers: { "x-token": token } }
       );
-      return true;
-    } catch ({
-      response: {
-        data: { message },
-      },
-    }){
+      return tareaEditada;
+    } catch (error){
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -54,7 +49,7 @@ export const DeleteTarea = async (id) => {
       });
     }
   };
-
+  
   export const createTarea = async (nombre, descripcion, fechaInicio, fechaFinal, estado, creador) => {
     try {
       const { data } = await axios.put(

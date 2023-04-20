@@ -5,23 +5,10 @@ import { useForm } from "react-hook-form";
 import { formOptions, sendData } from "../helpers/FormTareaHelper";
 
 export const FormTarea = ({
-  nombre,
-  descripcion,
-  fechaInicio,
-  fechaFinal,
-  estado,
-  creador,
+  tarea, option, id
 }) => {
   
-  const [state, setState] = useState({
-    nombre: nombre || "",
-    descripcion: descripcion || "",
-    fechaInicio: fechaInicio.slice(0, 10),
-    fechaFinal: fechaFinal.slice(0, 10),
-    estado: estado,
-    creador: creador || "",
-  });
-
+  const [state, setState] = useState({tarea});
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setState((prevState) => ({
@@ -30,8 +17,13 @@ export const FormTarea = ({
     }));
   };
 
-  const {handleSubmit} = useForm(formOptions);
+  const handleSubmit = (event) => {
+    sendData(state, 2, id);
+    // Llamar a la función enviarDatos() y pasar el estado actual como argumento
+  };
 
+
+  
   const handleDateChange = (name, value) => {
     setState((prevState) => ({
       ...prevState,
@@ -47,11 +39,6 @@ export const FormTarea = ({
     }));
   };
 
-  const crud = async () => {
-    await sendData(tarea, option);
-  };
-  console.log("Entre");
-
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
@@ -61,7 +48,9 @@ export const FormTarea = ({
           className="form-control"
           name="nombre"
           value={state.nombre}
-          onChange={handleInputChange}
+          onChange={({ target: { value } }) =>
+          setState(() => ({ ...state, nombre: value }))
+        }
         />
       </div>
       <div className="form-group">
@@ -70,7 +59,9 @@ export const FormTarea = ({
           className="form-control"
           name="descripcion"
           value={state.descripcion}
-          onChange={handleInputChange}
+          onChange={({ target: { value } }) =>
+          setState(() => ({ ...state, descripcion: value }))
+        }
         ></textarea>
       </div>
       <div className="form-group">
@@ -80,7 +71,9 @@ export const FormTarea = ({
           type="date"
           className="form-control"
           selected={state.fechaInicio}
-          onChange={(value) => handleDateChange("fechaInicio", value)}
+          onChange={({ target: { value } }) =>
+          setState(() => ({ ...state, fechaInicio: value }))
+        }
         />
       </div>
       <div className="form-group">
@@ -90,7 +83,9 @@ export const FormTarea = ({
           type="date"
           className="form-control"
           selected={state.fechaFinal}
-          onChange={(value) => handleDateChange("fechaFinal", value)}
+          onChange={({ target: { value } }) =>
+          setState(() => ({ ...state, fechaFinal: value }))
+        }
         />
       </div>
       <div className="form-group">
@@ -99,7 +94,9 @@ export const FormTarea = ({
         <input
           type="checkbox"
           checked={state.estado}
-          onChange={handleCheckboxChange}
+          onChange={({ target: { value } }) =>
+          setState(() => ({ ...state, estado: value }))
+        }
         />
       </div>
       <div className="form-group">
@@ -109,7 +106,9 @@ export const FormTarea = ({
           className="form-control"
           name="creador"
           value={state.creador}
-          onChange={handleInputChange}
+          onChange={({ target: { value } }) =>
+          setState(() => ({ ...state, creador: value }))
+        }
         />
       </div>
       <button type="submit" className="btn">
