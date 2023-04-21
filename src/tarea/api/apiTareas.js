@@ -36,7 +36,8 @@ export const DeleteTarea = async (id) => {
       const { data: { tareaEditada } } = await axios.put(
         `${URL}editar/${id}`,
         {
-          nombre, descripcion, fechaInicio, fechaFinal, estado, creador
+          nombre : nombre, descripcion: descripcion, fechaInicio:fechaInicio, fechaFinal:fechaFinal
+          , estado: estado, creador: creador
         },
         // { headers: { "x-token": token } }
       );

@@ -14,12 +14,12 @@ export const formOptions = { resolver: yupResolver(formSchema) };
 export const sendData = async (state, option, id) => {
   let resultado;
   console.log("STATE ENVIADO", state)
-  console.log("STATE ID", id)
-  console.log("STATE NOMBRE", state.nombre)
-  console.log("STATE DESCRIPCION", state.descripcion)
-  console.log("STATE FECHAS", state.fechaInicio)
-  console.log("STATE FECHAS", state.fechaFinal)
-  console.log("STATE CREADOR", state.creador)
+  console.log("STATE ID", state.tarea._id)
+  console.log("STATE NOMBRE", state.tarea.nombre)
+  console.log("STATE DESCRIPCION", state.tarea.descripcion)
+  console.log("STATE FECHAS", state.tarea.fechaInicio)
+  console.log("STATE FECHAS", state.tarea.fechaFinal)
+  console.log("STATE CREADOR", state.tarea.creador)
 
 
 
@@ -31,13 +31,13 @@ export const sendData = async (state, option, id) => {
     case 2:
       console.log("ENTRE AAAAAAAAAAAa")
       
-      resultado = await updateTarea(id, { // Llamar al método de axios con el id y los datos a actualizar
-        nombre: state.nombre,
-        descripcion: state.descripcion,
-        fechaInicio: state.fechaInicio,
-        fechaFinal: state.fechaFinal,
-        estado: state.estado,
-        creador: state.creador
+      resultado = await updateTarea(state.tarea._id, { // Llamar al método de axios con el id y los datos a actualizar
+        nombre: state.tarea.nombre,
+        descripcion: state.tarea.descripcion,
+        fechaInicio: state.tarea.fechaInicio,
+        fechaFinal: state.tarea.fechaFinal,
+        estado: state.tarea.estado,
+        creador: state.tarea.creador
       });
       
       console.log("RESULTADO ", resultado)

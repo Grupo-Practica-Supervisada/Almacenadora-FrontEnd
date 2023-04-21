@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
 import { formOptions, sendData } from "../helpers/FormTareaHelper";
 
-export const FormTarea = ({
-  tarea, option, id
-}) => {
-  
-  const [state, setState] = useState({tarea});
+export const FormTarea = (tareaEdit, option, id) => {
+  const [state, setState] = useState(tareaEdit);
+  console.log("STATE RECIBIDO",state)
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setState((prevState) => ({
@@ -22,8 +20,6 @@ export const FormTarea = ({
     // Llamar a la función enviarDatos() y pasar el estado actual como argumento
   };
 
-
-  
   const handleDateChange = (name, value) => {
     setState((prevState) => ({
       ...prevState,
@@ -47,10 +43,15 @@ export const FormTarea = ({
           type="text"
           className="form-control"
           name="nombre"
-          value={state.nombre}
-          onChange={({ target: { value } }) =>
-          setState(() => ({ ...state, nombre: value }))
-        }
+          value={state.tarea.nombre}
+          onChange={(event) =>
+            setState({
+              tarea: {
+                ...state.tarea,
+                nombre: event.target.value,
+              },
+            })
+          }
         />
       </div>
       <div className="form-group">
@@ -58,10 +59,15 @@ export const FormTarea = ({
         <textarea
           className="form-control"
           name="descripcion"
-          value={state.descripcion}
-          onChange={({ target: { value } }) =>
-          setState(() => ({ ...state, descripcion: value }))
-        }
+          value={state.tarea.descripcion}
+          onChange={(event) =>
+            setState({
+              tarea: {
+                ...state.tarea,
+                descripcion: event.target.value,
+              },
+            })
+          }
         ></textarea>
       </div>
       <div className="form-group">
@@ -70,10 +76,15 @@ export const FormTarea = ({
         <input
           type="date"
           className="form-control"
-          selected={state.fechaInicio}
-          onChange={({ target: { value } }) =>
-          setState(() => ({ ...state, fechaInicio: value }))
-        }
+          value={state.tarea.fechaInicio.substring(0, 10)}
+          onChange={(event) =>
+            setState({
+              tarea: {
+                ...state.tarea,
+                fechaInicio: event.target.value,
+              },
+            })
+          }
         />
       </div>
       <div className="form-group">
@@ -82,10 +93,15 @@ export const FormTarea = ({
         <input
           type="date"
           className="form-control"
-          selected={state.fechaFinal}
-          onChange={({ target: { value } }) =>
-          setState(() => ({ ...state, fechaFinal: value }))
-        }
+          value={state.tarea.fechaFinal.substring(0, 10)}
+          onChange={(event) =>
+            setState({
+              tarea: {
+                ...state.tarea,
+                fechaFinal: event.target.value,
+              },
+            })
+          }
         />
       </div>
       <div className="form-group">
@@ -93,10 +109,15 @@ export const FormTarea = ({
         <br />
         <input
           type="checkbox"
-          checked={state.estado}
-          onChange={({ target: { value } }) =>
-          setState(() => ({ ...state, estado: value }))
-        }
+          checked={state.tarea.estado}
+          onChange={(event) =>
+            setState({
+              tarea: {
+                ...state.tarea,
+                estado: event.target.checked,
+              },
+            })
+          }
         />
       </div>
       <div className="form-group">
@@ -105,10 +126,15 @@ export const FormTarea = ({
           type="text"
           className="form-control"
           name="creador"
-          value={state.creador}
-          onChange={({ target: { value } }) =>
-          setState(() => ({ ...state, creador: value }))
-        }
+          value={state.tarea.creador}
+          onChange={(event) =>
+            setState({
+              tarea: {
+                ...state.tarea,
+                creador: event.target.value,
+              },
+            })
+          }
         />
       </div>
       <button type="submit" className="btn">

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const CreateUser = () => {
+export const CreateTarea = () => {
   return (
     <>
       <div className='container'>

@@ -5,20 +5,15 @@ import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Swal from "sweetalert2";
 import { UpdateTarea } from "./UpdateTarea";
+import { tarea } from "../models/tarea";
 
 export const ListaTareas = () => {
   const [listaTareas, setListaTareas] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [tareas, setTareas] = useState({
-    nombre: "",
-    descripcion: "", 
-    fechaInicio: new Date(), 
-    fechaFinal: new Date(), 
-    estado: false, 
-    creador: ""
-  });
+  const [tareas, setTareas] = useState(tarea);
   const [isChecked, setIsChecked] = useState(true);
 
+  
   const viewTareasList = async () => {
     const getListTareasFromApi = await apiTareas();
     setListaTareas(getListTareasFromApi);
@@ -73,6 +68,8 @@ export const ListaTareas = () => {
               <th scope="col">Descripcion</th>
               <th scope="col">Estado</th>
               <th scope="col">Creador</th>
+              <th scope="col">Fecha Inicio</th>
+              <th scope="col">Fecha Final</th>
               <th scope="col">Opciones</th>
             </tr>
           </thead>
@@ -91,6 +88,8 @@ export const ListaTareas = () => {
                     />
                   </td>
                   <td>{u.creador}</td>
+                  <td>{u.fechaInicio}</td>
+                  <td>{u.fechaFinal}</td>
                   <td>
                     <button className="btn btn-info">
                       Ver

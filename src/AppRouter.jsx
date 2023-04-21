@@ -4,9 +4,10 @@ import { Link, Navigate, Route, Routes } from 'react-router-dom'
 import { NavBar } from './NavBar';
 import { isUserAuthenticated } from './login/helpers/LoginHelper';
 import { ListaTareas } from './tarea/components/ListaTareas';
-import { CreateUser } from './tarea/components/CreateUser';
+import { CreateTarea } from './tarea/components/CreateTarea';
 
 export const AppRouter = () => {
+    const acepta = true;
     return (
         <>
             <NavBar></NavBar>
@@ -18,8 +19,8 @@ export const AppRouter = () => {
 
                 
                 <Route path='/agregar' 
-                element={isUserAuthenticated() ? 
-                (<CreateUser/>) : (<Navigate to='/login'/>)}>
+                element={acepta ? 
+                (<CreateTarea/>) : (<Navigate to='/login'/>)}>
 
                 </Route>
 
