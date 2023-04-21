@@ -17,6 +17,7 @@ export const sendData = async (state, option, id) => {
   console.log("STATE ID", state.tarea._id)
   console.log("STATE NOMBRE", state.tarea.nombre)
   console.log("STATE DESCRIPCION", state.tarea.descripcion)
+  console.log("STATE DESCRIPCION", state.tarea.estado)
   console.log("STATE FECHAS", state.tarea.fechaInicio)
   console.log("STATE FECHAS", state.tarea.fechaFinal)
   console.log("STATE CREADOR", state.tarea.creador)
@@ -26,7 +27,31 @@ export const sendData = async (state, option, id) => {
   console.log(option)
   switch (option) {
     case 1:
-      // Código para crear tarea
+      console.log("hola");
+      resultado = await createTarea({ // Llamar al método de axios con el id y los datos a actualizar
+        nombre: state.tarea.nombre,
+        descripcion: state.tarea.descripcion,
+        fechaInicio: state.tarea.fechaInicio,
+        fechaFinal: state.tarea.fechaFinal,
+        estado: state.tarea.estado,
+        creador: state.tarea.creador
+      }
+      );
+      if (resultado) {
+        Swal.fire({
+          icon: "success",
+          title: "Genial!",
+          text: "usuario creado correctamente!",
+          showConfirmButton: true,
+          confirmButtonText: "Ok",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = "/";
+          } else {
+            window.location.href = "/";
+          }
+        });
+      }
       break;
     case 2:
       console.log("ENTRE AAAAAAAAAAAa")

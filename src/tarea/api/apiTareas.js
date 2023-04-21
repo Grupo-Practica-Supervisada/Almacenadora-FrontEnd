@@ -53,7 +53,7 @@ export const DeleteTarea = async (id) => {
   
   export const createTarea = async (nombre, descripcion, fechaInicio, fechaFinal, estado, creador) => {
     try {
-      const { data } = await axios.put(
+      const { tareaGuardada } = await axios.post(
         `${URL}agregar`,
         {
           nombre, descripcion, fechaInicio, fechaFinal, estado, creador
