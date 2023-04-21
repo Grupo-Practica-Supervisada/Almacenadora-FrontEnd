@@ -11,10 +11,10 @@ export const NavBar = () => {
         <>
             {
                 isUserAuthenticated() && (
-                    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                    <nav className="navbar navbar-expand-lg navbar-light bg-light" data-bs-theme="dark">
                         <div className="container-fluid">
                             <Link className="navbar-brand" to="/" >
-                                CRUD
+                                ALMACENADORA
                             </Link>
                             <button
                                 className="navbar-toggler"
@@ -31,7 +31,7 @@ export const NavBar = () => {
 
                                 <ul className='navbar-nav me-auto mb-x mb-lg-0'>
                                     <li className='nav-item'>
-                                        <Link className='nav-item-active' to='/agregar'>Agregar usuarios</Link>
+                                        <Link className='nav-item-active' to='/agregar'>Agregar tareas</Link>
                                     </li>
                                 </ul>
 

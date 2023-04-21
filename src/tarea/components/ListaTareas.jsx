@@ -1,24 +1,42 @@
 import { useEffect, useState } from "react";
 import { DeleteTarea, apiTareas } from "../api/apiTareas";
-import { apiUsuarios } from "../api/apiUsuarios"; // Importa la API de usuarios
-import { Link } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Swal from "sweetalert2";
+import { UpdateTarea } from "./UpdateTarea";
+import { tarea } from "../models/tarea";
 
 export const ListaTareas = () => {
   const [listaTareas, setListaTareas] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [tareas, setTareas] = useState(tarea);
   const [isChecked, setIsChecked] = useState(true);
 
+  
   const viewTareasList = async () => {
     const getListTareasFromApi = await apiTareas();
     setListaTareas(getListTareasFromApi);
   };
 
+  const reload = async () => {
+    const result = await apiTareas();
+    setTareas(result);
+  };
+
   useEffect(() => {
     viewTareasList();
-  }, []);
+  }, [showModal]);
+
+  const handleOpenModal = (u) => {
+    setShowModal(true);
+    setTareas(u);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
 
   const eliminar = async (id) => {
     let result = await DeleteTarea(id);
@@ -50,31 +68,32 @@ export const ListaTareas = () => {
               <th scope="col">Descripcion</th>
               <th scope="col">Estado</th>
               <th scope="col">Creador</th>
+              <th scope="col">Fecha Inicio</th>
+              <th scope="col">Fecha Final</th>
               <th scope="col">Opciones</th>
             </tr>
           </thead>
           <tbody>
             {listaTareas.map((u) => {
-              return (
+              return (   
+                
                 <tr key={u._id}>
                   <th scope="row">{u._id}</th>
+
                   <td>{u.nombre}</td>
                   <td>{u.descripcion}</td>
                   <td>
-                    <input
+                    <input className="tachado"
                       type="checkbox"
                       checked={u.estado}
                       onChange={() => setIsChecked(!isChecked)}
                     />
                   </td>
                   <td>{u.creador}</td>
+                  <td>{u.fechaInicio}</td>
+                  <td>{u.fechaFinal}</td>
                   <td>
-                    <button className="btn btn-info">
-                      Ver
-                      <VisibilityIcon />
-                    </button>
-                    <button className="btn btn-warning">
-                      Editar
+                    <button className="btn btn-warning"  onClick={() => handleOpenModal(u)}> 
                       <EditIcon />
                     </button>
                     <button
@@ -91,6 +110,11 @@ export const ListaTareas = () => {
             })}
           </tbody>
         </table>
+        <UpdateTarea
+          tareaEdit={tareas}
+          isOpen={showModal}
+          onClose={() => handleCloseModal()}
+        ></UpdateTarea>
       </div>
     </>
   );
