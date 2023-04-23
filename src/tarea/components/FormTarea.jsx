@@ -1,39 +1,19 @@
-import React, { useEffect, useState } from "react";
-import DatePicker from "react-datepicker";
+import React, { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import { useForm } from "react-hook-form";
-import { formOptions, sendData } from "../helpers/FormTareaHelper";
+import { sendData } from "../helpers/FormTareaHelper";
 
 export const FormTarea = (tareaEdit, option, id) => {
   const [state, setState] = useState(tareaEdit);
-  console.log("STATE RECIBIDO",state)
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setState((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+  
+
 
   const handleSubmit = (event) => {
+    event.preventDefault();
     sendData(state, 2, id);
-    // Llamar a la función enviarDatos() y pasar el estado actual como argumento
+
   };
 
-  const handleDateChange = (name, value) => {
-    setState((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
 
-  const handleCheckboxChange = (event) => {
-    const { name, checked } = event.target;
-    setState((prevState) => ({
-      ...prevState,
-      [name]: checked,
-    }));
-  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -137,9 +117,12 @@ export const FormTarea = (tareaEdit, option, id) => {
           }
         />
       </div>
-      <button type="submit" className="btn">
-        Enviar
-      </button>
+      <div className="container text-center">
+
+        <button id='btn-enviar' type="submit" className="btn">
+          Enviar
+        </button>
+      </div>
     </form>
   );
 };

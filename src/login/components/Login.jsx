@@ -19,7 +19,6 @@ export const Login = () => {
                 confirmButtonText: 'Ok'
             }).then((r) => {
                 if (r.isConfirmed) {
-                    console.log('Error');
                     window.location.href = '/'
                 }
             })
@@ -32,7 +31,7 @@ export const Login = () => {
             <div id='contenedor'>
                 <div id='central'>
                     <form id='login' onSubmit={handleSubmit}>
-                        <div class="titulo">
+                        <div className="titulo">
                             Bienvenido
                         </div>
                         <div className="mb-3">

@@ -15,7 +15,7 @@ export const apiTareas = async() => {
 export const DeleteTarea = async (id) => {
     try {
       const { data } = await axios.delete(`${URL}eliminar/${id}`);
-      console.log(data)
+      
       return true;
     } catch ({
       response: {

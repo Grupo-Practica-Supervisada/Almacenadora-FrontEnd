@@ -17,6 +17,10 @@ export const AppRouter = () => {
                     <ListaTareas></ListaTareas>
                 ) : (<Navigate to='/login' />)}></Route>
 
+                <Route path='/holi' element={ <h1>dllfhsdlfjslkfjslkfjsls</h1> } >
+
+                </Route>
+
                 
                 <Route path='/agregar' 
                 element={acepta ? 

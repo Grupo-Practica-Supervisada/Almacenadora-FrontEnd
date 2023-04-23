@@ -13,9 +13,11 @@ export const NavBar = () => {
                 isUserAuthenticated() && (
                     <nav className="navbar navbar-expand-lg navbar-light bg-light" data-bs-theme="dark">
                         <div className="container-fluid">
-                            <Link className="navbar-brand" to="/" >
+                            <Link className="navbar-brand" to="/">
+                                <img id='logo' src="./src/assets/images/prueba.png" alt="Logo" width="30" height="24" className="d-inline-block align-text-top" />
                                 ALMACENADORA
                             </Link>
+
                             <button
                                 className="navbar-toggler"
                                 type="button"
@@ -31,16 +33,18 @@ export const NavBar = () => {
 
                                 <ul className='navbar-nav me-auto mb-x mb-lg-0'>
                                     <li className='nav-item'>
-                                        <Link className='nav-item-active' to='/agregar'>Agregar tareas</Link>
+                                        <button id='btn-agregar' type="button" className="btn btn-success">
+                                            <Link className='nav-item-active' to='/agregar'>Agregar tareas</Link>
+                                        </button>
                                     </li>
                                 </ul>
 
                                 <ul className="navbar-nav ms-auto" >
                                     {localStorage.getItem("token") && (
                                         <li className="nav-item" >
-                                            <Link className="nav-link" to="/login" onClick={() => logOut()} >
+                                            <a className="nav-link" to="/login" onClick={() => logOut()} >
                                                 Cerrar Sesión
-                                            </Link>
+                                            </a>
                                         </li>
                                     )}
                                 </ul>

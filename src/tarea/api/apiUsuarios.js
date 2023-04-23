@@ -13,6 +13,6 @@ export const apiUsuarios = async (id) => {
       });
       return usuario;
     } catch (error) {
-      console.log(error);
+      
     }
   }

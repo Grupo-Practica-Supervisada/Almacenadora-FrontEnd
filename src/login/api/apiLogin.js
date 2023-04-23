@@ -17,7 +17,7 @@ export const apiLogin = async (email, password) => {
         return token;
 
     } catch ({response: {data: {message}}}) {
-        console.log(message);
+        
         Swal.fire({
             icon : "error",
             title: "Error en el login",

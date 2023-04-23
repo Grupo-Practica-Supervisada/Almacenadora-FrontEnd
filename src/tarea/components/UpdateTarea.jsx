@@ -5,10 +5,6 @@ export const UpdateTarea = ({ isOpen, onClose, tareaEdit }) => {
   if (!isOpen) {
     return null;
   }
-  console.log("Valor de fecha:", tareaEdit.fechaInicio);
-  console.log("Valor de fecha:", tareaEdit.fechaFinal);
-
-  console.log("EL VALOR DEL USUARIO QUE QUIERE EDITAR ES: ", tareaEdit)
   return (
     <>
       <>
